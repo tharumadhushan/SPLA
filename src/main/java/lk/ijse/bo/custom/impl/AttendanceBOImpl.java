@@ -20,8 +20,6 @@ public class AttendanceBOImpl implements AttendanceBO {
 
     }
 
-
-
     @Override
     public List<String> generateEmployeeAttendance() throws SQLException {
         return  employeeDAO.generateEmployeeAttendance();

@@ -11,4 +11,8 @@ public class SupplierOrderDTO {
     private String supplierOrderID;
     private Date date;
     private double total;
+
+    public SupplierOrderDTO(String code, Integer qty, Double unitPrice, Double total) {
+
+    }
 }

@@ -4,7 +4,7 @@ import lk.ijse.Model.EmployeeDTO;
 import lk.ijse.bo.SuperBo;
 import lk.ijse.bo.custom.EmployeeBO;
 
-public class EmployeeBOImpl implements EmployeeBO, SuperBo {
+public class EmployeeBOImpl implements EmployeeBO {
     @Override
     public boolean save(EmployeeDTO employee) {
         return false;

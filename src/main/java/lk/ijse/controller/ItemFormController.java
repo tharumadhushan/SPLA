@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.Model.PartsDTO;
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.ItemBO;
 import lk.ijse.bo.custom.impl.ItemBOImpl;
 
@@ -27,7 +28,7 @@ public class ItemFormController {
     @FXML
     private TextField txtunitprice;
 
-    ItemBO itemBO = new ItemBOImpl();
+    ItemBO itemBO= (ItemBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ITEM);
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         if (txtid.getText().matches("^[P0-9]{4}$")) {

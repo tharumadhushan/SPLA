@@ -1,13 +1,16 @@
 package lk.ijse.bo.custom;
 
 import lk.ijse.Model.CustomerDTO;
+import lk.ijse.bo.SuperBo;
 
-public interface CustomerBO {
-    boolean delete(String id);
+import java.sql.SQLException;
 
-    boolean save(CustomerDTO customer);
+public interface CustomerBO extends SuperBo {
+    boolean delete(String id) throws SQLException;
 
-    CustomerDTO search(String id);
+    boolean save(CustomerDTO dto) throws SQLException;
 
-    boolean Update(CustomerDTO customer);
+    CustomerDTO search(String id) throws SQLException;
+
+    boolean Update(CustomerDTO dto) throws SQLException;
 }

@@ -1,13 +1,15 @@
 package lk.ijse.bo.custom;
 
+import lk.ijse.bo.SuperBo;
+
 import java.sql.SQLException;
 
-public interface DashboardBO {
+public interface DashboardBO extends SuperBo {
     int countCustomers() throws SQLException;
 
-    int countOrders();
+    int countOrders() throws SQLException;
 
-    double getTotalOrderSales();
+    double getTotalOrderSales() throws SQLException;
 
-    int countItem();
+    int countItem() throws SQLException;
 }

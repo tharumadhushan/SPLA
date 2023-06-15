@@ -5,7 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.Model.SupplierDTO;
-import lk.ijse.grgrh.SupplierModel;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.SuppliesBO;
 
 import java.sql.SQLException;
 
@@ -26,12 +27,14 @@ public class SuppliesFormController {
     @FXML
     private TextField txtnic;
 
+    SuppliesBO suppliesBO= (SuppliesBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SUPPLIES);
+
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         if (txtid.getText().matches("^[S0-9]{4}$")) {
             String id = txtid.getText();
             try {
-                boolean isDelete = SupplierModel.delete(id);
+                boolean isDelete = suppliesBO.delete(id);
                 if (isDelete) {
                     new Alert(Alert.AlertType.CONFIRMATION, "OK").show();
                 }
@@ -55,7 +58,7 @@ public class SuppliesFormController {
         SupplierDTO supplier=new SupplierDTO(id,contact,name,nic,adress);
 
         try {
-            boolean isSave=SupplierModel.save(supplier);
+            boolean isSave=suppliesBO.save(supplier);
             if (isSave){
                 new Alert(Alert.AlertType.CONFIRMATION,"OK").show();
             }
@@ -72,7 +75,7 @@ public class SuppliesFormController {
         if (txtid.getText().matches("^[S0-9]{4}$")){
         String id=txtid.getText();
         try {
-            SupplierDTO supplier= SupplierModel.search(id);
+            SupplierDTO supplier= suppliesBO.search(id);
             if (supplier!=null){
                 txtid.setText(supplier.getSuppliersID());
                 txtcontact.setText(supplier.getContact());
@@ -99,7 +102,7 @@ public class SuppliesFormController {
 
         SupplierDTO suppliers=new SupplierDTO(id,contact,name,nic,adress);
         try {
-            boolean isUpdate=SupplierModel.update(suppliers);
+            boolean isUpdate=suppliesBO.update(suppliers);
             if (isUpdate){
                 new Alert(Alert.AlertType.CONFIRMATION,"OK").show();
             }

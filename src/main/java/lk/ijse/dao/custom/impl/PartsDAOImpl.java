@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.Model.OrderDetailDTO;
+import lk.ijse.Model.SupplierOrderDetailDTO;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.PartsDAO;
 import lk.ijse.entity.Parts;
@@ -76,8 +77,8 @@ public class PartsDAOImpl implements PartsDAO {
         String sql = "UPDATE parts SET qtyOnStock = (qtyOnStock - ?) WHERE itemCode = ?";
         return SQLUtil.execute(sql,dto.getQty(),dto.getCode());
     }
-    public boolean updateQtyOrder1(List<OrderDetailDTO> orderDtoList) throws SQLException {
-        for (OrderDetailDTO dto : orderDtoList) {
+    public boolean updateQtyOrder1(List<SupplierOrderDetailDTO> orderDtoList) throws SQLException {
+        for (SupplierOrderDetailDTO dto : orderDtoList) {
             if (!updateQtyOrder1(dto)){
                 return false;
             }
@@ -85,9 +86,9 @@ public class PartsDAOImpl implements PartsDAO {
         return true;
     }
 
-    public boolean updateQtyOrder1(OrderDetailDTO dto) throws SQLException {
+    public boolean updateQtyOrder1(SupplierOrderDetailDTO dto) throws SQLException {
         String sql = "UPDATE parts SET qtyOnStock = (qtyOnStock + ?) WHERE itemCode = ?";
-        return SQLUtil.execute(sql,dto.getQty(),dto.getCode());
+        return SQLUtil.execute(sql,dto.getOdrderQty(),dto.getItemCode());
     }
 
     public boolean save(Parts item) throws SQLException {

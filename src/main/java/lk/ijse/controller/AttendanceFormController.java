@@ -12,6 +12,7 @@ import lk.ijse.Model.AttendanceDTO;
 import lk.ijse.Model.EmployeeDTO;
 import lk.ijse.Model.tm.AttendanceTm;
 import lk.ijse.Model.tm.PlaceOrderTM;
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.AttendanceBO;
 import lk.ijse.dao.DAOFactory;
 import lombok.SneakyThrows;
@@ -60,7 +61,8 @@ public class AttendanceFormController implements Initializable {
     private ObservableList<PlaceOrderTM> obList = FXCollections.observableArrayList();
     private java.awt.Label txtEmID;
 
-    AttendanceBO attendanceBO = (AttendanceBO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ATTENDANCE);
+    AttendanceBO attendanceBO = (AttendanceBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ATTENDANCE);
+
 
 
 

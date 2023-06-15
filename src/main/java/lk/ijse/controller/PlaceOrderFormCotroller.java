@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.PlaceOrderBO;
 import lk.ijse.bo.custom.impl.PlaceOrderBOImpl;
 import lk.ijse.db.DBConnection;
@@ -97,7 +98,7 @@ public class PlaceOrderFormCotroller implements Initializable {
     private ObservableList<PlaceOrderTM> obList = FXCollections.observableArrayList();
     private String total;
 
-    PlaceOrderBO placeOrderBO =new PlaceOrderBOImpl();
+    PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.PLACEORDER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

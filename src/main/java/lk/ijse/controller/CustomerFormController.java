@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.Model.CustomerDTO;
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.CustomerBO;
+import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.impl.CustomerDAOImpl;
 
 
@@ -25,13 +27,18 @@ public class CustomerFormController {
     @FXML
     private TextField txtnic;
 
-    CustomerBO customerBO= (CustomerBO) new CustomerDAOImpl();
+    CustomerBO customerBO= (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         if (txtid.getText().matches("^[C0-9]{4}$")) {
             String id = txtid.getText();
-            boolean isDelete = customerBO.delete(id);
+            boolean isDelete = false;
+            try {
+                isDelete = customerBO.delete(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (isDelete) {
                 new Alert(Alert.AlertType.CONFIRMATION, "OK").show();
             }
@@ -50,7 +57,12 @@ public class CustomerFormController {
 
             CustomerDTO customer = new CustomerDTO(id, name, contact, nic);
 
-            boolean isSave = customerBO.save(customer);
+            boolean isSave = false;
+            try {
+                isSave = customerBO.save(customer);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (isSave) {
                 new Alert(Alert.AlertType.CONFIRMATION, "ok").show();
             }
@@ -64,7 +76,12 @@ public class CustomerFormController {
         if (txtid.getText().matches("^[C0-9]{4}$")) {
             String id = txtid.getText();
 
-            CustomerDTO customer = customerBO.search(id);
+            CustomerDTO customer = null;
+            try {
+                customer = customerBO.search(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
             if (customer != null) {
                 txtid.setText(customer.getCustId());
@@ -86,7 +103,12 @@ public class CustomerFormController {
             String contact = txtcontact.getText();
 
             CustomerDTO customer = new CustomerDTO(id, name, nic, contact);
-            boolean isUpdate = customerBO.Update(customer);
+            boolean isUpdate = false;
+            try {
+                isUpdate = customerBO.Update(customer);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (isUpdate) {
                 new Alert(Alert.AlertType.CONFIRMATION, "OK").show();
             }

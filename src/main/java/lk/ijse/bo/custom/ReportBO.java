@@ -1,4 +1,6 @@
 package lk.ijse.bo.custom;
 
-public interface ReportBO {
+import lk.ijse.bo.SuperBo;
+
+public interface ReportBO extends SuperBo {
 }

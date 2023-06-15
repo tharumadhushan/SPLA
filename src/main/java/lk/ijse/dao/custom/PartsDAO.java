@@ -1,6 +1,7 @@
 package lk.ijse.dao.custom;
 
 import lk.ijse.Model.OrderDetailDTO;
+import lk.ijse.Model.SupplierOrderDetailDTO;
 import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.entity.Parts;
@@ -20,9 +21,7 @@ public interface PartsDAO extends CrudDAO<Parts> {
     public boolean updateQtyOrder(List<OrderDetailDTO> orderDtoList) throws SQLException ;
 
 
-    public boolean updateQtyOrder1(List<OrderDetailDTO> orderDtoList) throws SQLException ;
-
-    public boolean updateQtyOrder1(OrderDetailDTO dto) throws SQLException ;
+    public boolean updateQtyOrder1(List<SupplierOrderDetailDTO> orderDtoList) throws SQLException ;
 
 
     public int countItem() throws SQLException ;

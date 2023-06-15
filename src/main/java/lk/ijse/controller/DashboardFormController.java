@@ -9,8 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.DashboardBO;
 import lk.ijse.bo.custom.impl.DashboardBOImpl;
+import lk.ijse.dao.DAOFactory;
 
 
 import javax.swing.*;
@@ -34,7 +36,7 @@ public class DashboardFormController {
 
 
 
-    DashboardBO dashboardBO = new DashboardBOImpl();
+    DashboardBO dashboardBO= (DashboardBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.DASHBOARD);
 
     @FXML
     public void initialize(){

@@ -2,11 +2,12 @@ package lk.ijse.bo.custom;
 
 import lk.ijse.Model.OrderDetailDTO;
 import lk.ijse.Model.PartsDTO;
+import lk.ijse.bo.SuperBo;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PlaceOrderBO {
+public interface PlaceOrderBO extends SuperBo {
 
     List<String> genarateItemCode() throws SQLException;
 

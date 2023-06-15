@@ -6,6 +6,7 @@ import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.SupplierOrderDetailDAO;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
@@ -22,4 +23,5 @@ public class SupplierOrderDetailDAOImpl implements SupplierOrderDetailDAO {
         String sql = "INSERT INTO suppliersorderdetail VALUES(?,?,?,?)";
         return SQLUtil.execute(sql,orderId,dto.getItemCode(),dto.getOdrderQty(),total);
     }
+
 }

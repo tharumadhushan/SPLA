@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.Model.EmployeeDTO;
+import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.EmployeeBO;
 import lk.ijse.dao.DAOFactory;
 
@@ -28,7 +29,7 @@ public class EmployeeFormController {
     @FXML
     private TextField empNic;
 
-    EmployeeBO employeeBO = (EmployeeBO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.EMPLOYEE);
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.EMPLOYEE);
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         if (empId.getText().matches("^[E0-9]{4}$")) {
