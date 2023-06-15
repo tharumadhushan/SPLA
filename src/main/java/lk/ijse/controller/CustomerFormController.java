@@ -102,7 +102,7 @@ public class CustomerFormController {
             String nic = txtnic.getText();
             String contact = txtcontact.getText();
 
-            CustomerDTO customer = new CustomerDTO(id, name, nic, contact);
+            CustomerDTO customer = new CustomerDTO(id, name,  contact,nic);
             boolean isUpdate = false;
             try {
                 isUpdate = customerBO.Update(customer);

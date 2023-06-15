@@ -167,37 +167,6 @@ public class PlaceSupplierController implements Initializable {
     }
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        String code = (String) cmbProductCode.getSelectionModel().getSelectedItem();
-        String description = lblDescription.getText();
-        Integer qty = Integer.valueOf(txtQty.getText());
-        Double price = Double.valueOf(lblUnitPrice.getText());
-        Double total = qty*price;
-        Button btn = new Button("Remove");
-        btn.setCursor(Cursor.HAND);
-
-        btnRemoveOnAction(btn);
-
-        if (!obList.isEmpty()){
-            for (int i = 0; i < tblOrderCart1.getItems().size(); i++) {
-                if (colItemCode.getCellData(i).equals(code)) {
-                    qty += (Integer) colQty.getCellData(i);
-                    total = qty * price;
-
-                    obList.get(i).setQty(qty);
-                    obList.get(i).setTotal(total);
-
-                    tblOrderCart1.refresh();
-                    getNetTotal();
-                    return;
-                }
-            }
-        }
-
-        PlaceSupplierTM tm = new PlaceSupplierTM(code, description, qty, price, total, btn);
-        obList.add(tm);
-        tblOrderCart1.setItems(obList);
-        getNetTotal();
-        txtQty.setText("");
 
     }
 
@@ -236,14 +205,40 @@ public class PlaceSupplierController implements Initializable {
 
     @FXML
     void btnNewCustomerOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/customer_form.fxml"));
-        Parent load= loader.load();
-        root.getChildren().clear();
-        root.getChildren().add(load);
     }
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
+
+    }
+    private void addBill() throws JRException, SQLException {
+        String id=lblOrderId.getText();
+        JasperDesign load = null;
+        load = JRXmlLoader.load(new File("C:\\Users\\Admin\\Desktop\\My Final Project\\finalproject\\src\\main\\resources\\report\\supplier.jrxml"));
+        JRDesignQuery newQuery = new JRDesignQuery();
+        String sql = "select i.description as name,i.unitPrice as unitPrice,oi.orderQTY , i.unitPrice*oi.orderQTY as subTotal  from parts i inner join suppliersorderdetail oi on  i.itemCode=oi.itemcode where oi.suppliersOrderID = '"+id+"'";
+        newQuery.setText(sql);
+        load.setQuery(newQuery);
+        JasperReport js = JasperCompileManager.compileReport(load);
+        HashMap<String,Object> hm=new HashMap<>();
+        hm.put("sparepartsSupplies","Name");
+        hm.put("orderId","K001");
+        JasperPrint jp = JasperFillManager.fillReport(js, null, DBConnection.getInstance().getConnection());
+        JasperViewer viewer = new JasperViewer(jp, false);
+        viewer.show();
+    }
+
+    @FXML
+    void cmbCustomerOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cmbProductCodeOnAction(ActionEvent event) {
+
+    }
+
+    public void btnPlaceOrderOnAction(javafx.event.ActionEvent actionEvent) {
         String orderId = lblOrderId.getText();
         double total = Double.parseDouble(lblNetTotal.getText());
         String custId = cmbCustomerId.getSelectionModel().getSelectedItem();
@@ -265,25 +260,9 @@ public class PlaceSupplierController implements Initializable {
         } catch (SQLException | JRException e) {
             e.printStackTrace();
         }
-    } private void addBill() throws JRException, SQLException {
-        String id=lblOrderId.getText();
-        JasperDesign load = null;
-        load = JRXmlLoader.load(new File("C:\\Users\\Admin\\Desktop\\finalproject (3)\\finalproject\\finalproject\\src\\main\\resources\\report\\supplier.jrxml"));
-        JRDesignQuery newQuery = new JRDesignQuery();
-        String sql = "select i.description as name,i.unitPrice as unitPrice,oi.orderQTY , i.unitPrice*oi.orderQTY as subTotal  from parts i inner join suppliersorderdetail oi on  i.itemCode=oi.itemcode where oi.suppliersOrderID = '"+id+"'";
-        newQuery.setText(sql);
-        load.setQuery(newQuery);
-        JasperReport js = JasperCompileManager.compileReport(load);
-        HashMap<String,Object> hm=new HashMap<>();
-        hm.put("sparepartsSupplies","Name");
-        //  hm.put("orderId","K001");
-        JasperPrint jp = JasperFillManager.fillReport(js, null, DBConnection.getInstance().getConnection());
-        JasperViewer viewer = new JasperViewer(jp, false);
-        viewer.show();
     }
 
-    @FXML
-    void cmbCustomerOnAction(ActionEvent event) {
+    public void cmbCustomerOnAction(javafx.event.ActionEvent actionEvent) {
         String id = String.valueOf(cmbCustomerId.getSelectionModel().getSelectedItem());
 
         try {
@@ -294,14 +273,20 @@ public class PlaceSupplierController implements Initializable {
         }
     }
 
-    @FXML
-    void cmbProductCodeOnAction(ActionEvent event) {
+    public void btnNewCustomerOnAction(javafx.event.ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/customer_form.fxml"));
+        Parent load= loader.load();
+        root.getChildren().clear();
+        root.getChildren().add(load);
+    }
+
+    public void cmbProductCodeOnAction(javafx.event.ActionEvent actionEvent) {
         String code = String.valueOf(cmbProductCode.getSelectionModel().getSelectedItem());
 
         try {
             PartsDTO product = placeSupplierBO.search(code);
             if (product != null){
-                lblDescription.setText(product.getPartsName());
+                lblDescription.setText(product.getDescription());
                 lblUnitPrice.setText(String.valueOf(product.getUnitPrice()));
                 lblQtyOnHand.setText(String.valueOf(product.getQtyOnStock()));
 
@@ -310,6 +295,44 @@ public class PlaceSupplierController implements Initializable {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void btnAddToCartOnAction(javafx.event.ActionEvent actionEvent) {
+        String code = (String) cmbProductCode.getSelectionModel().getSelectedItem();
+        String description = lblDescription.getText();
+        Integer qty = Integer.valueOf(txtQty.getText());
+        Double price = Double.valueOf(lblUnitPrice.getText());
+        Double total = qty*price;
+        Button btn = new Button("Remove");
+        btn.setCursor(Cursor.HAND);
+
+        btnRemoveOnAction(btn);
+
+        if (!obList.isEmpty()){
+            for (int i = 0; i < tblOrderCart1.getItems().size(); i++) {
+                if (colItemCode.getCellData(i).equals(code)) {
+                    qty += (Integer) colQty.getCellData(i);
+                    total = qty * price;
+
+                    obList.get(i).setQty(qty);
+                    obList.get(i).setTotal(total);
+
+                    tblOrderCart1.refresh();
+                    getNetTotal();
+                    return;
+                }
+            }
+        }
+
+        PlaceSupplierTM tm = new PlaceSupplierTM(code, description, qty, price, total, btn);
+        obList.add(tm);
+        tblOrderCart1.setItems(obList);
+        getNetTotal();
+        txtQty.setText("");
+
+    }
+
+    public void btnBackOnAction(javafx.event.ActionEvent actionEvent) {
 
     }
 }

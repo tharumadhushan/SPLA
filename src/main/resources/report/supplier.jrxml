@@ -43,10 +43,6 @@
     </background>
     <title>
         <band height="79" splitType="Stretch">
-            <image>
-                <reportElement x="0" y="0" width="100" height="70" uuid="265665f3-ba9a-4e74-95e6-3f878bc273f7"/>
-                <imageExpression><![CDATA["C:/Users/Admin/Desktop/45.png"]]></imageExpression>
-            </image>
             <staticText>
                 <reportElement x="128" y="0" width="307" height="30" uuid="d04edffe-6312-47fc-917a-9453633fbed9"/>
                 <textElement textAlignment="Center">
@@ -61,6 +57,10 @@
                 </textElement>
                 <text><![CDATA[202/D,Welmilla,Bandaragama   0769435569  ]]></text>
             </staticText>
+            <image>
+                <reportElement x="0" y="0" width="100" height="79" uuid="d7577593-e783-4e56-af83-e424b7e41943"/>
+                <imageExpression><![CDATA["C:/Users/Admin/Desktop/My Final Project/MVC_Spare_Parts/finalproject/src/main/resources/img/45.png"]]></imageExpression>
+            </image>
         </band>
     </title>
     <pageHeader>
@@ -96,7 +96,7 @@
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9884eda5-7293-4927-82a0-ac541cd37317"/>
                 </reportElement>
                 <textElement>
-                    <font fontName="Arial" size="12"/>
+                    <font fontName="DejaVu Serif" size="12"/>
                 </textElement>
                 <text><![CDATA[name]]></text>
             </staticText>
@@ -105,7 +105,7 @@
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="527e6a86-1bef-4ce8-90f7-c17f7db01d26"/>
                 </reportElement>
                 <textElement>
-                    <font fontName="Arial" size="12"/>
+                    <font fontName="DejaVu Serif" size="12"/>
                 </textElement>
                 <text><![CDATA[unitPrice]]></text>
             </staticText>
@@ -114,7 +114,7 @@
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2932bfe8-dd87-4152-b2de-695dddcccf25"/>
                 </reportElement>
                 <textElement>
-                    <font fontName="Arial" size="12"/>
+                    <font fontName="DejaVu Serif" size="12"/>
                 </textElement>
                 <text><![CDATA[orderQTY]]></text>
             </staticText>

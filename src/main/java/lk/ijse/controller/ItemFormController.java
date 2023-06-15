@@ -82,9 +82,9 @@ public class ItemFormController {
             PartsDTO item = itemBO.search(id);
 
             if (item!= null) {
-               txtid.setText(item.getPartId());
-               txtname.setText(item.getPartsName());
-               txttype.setText(item.getType());
+               txtid.setText(item.getItemCode());
+               txtname.setText(item.getDescription());
+               txttype.setText(item.getVehicleBrand());
                txtunitprice.setText(String.valueOf(item.getUnitPrice()));
                txtqty.setText(String.valueOf(item.getQtyOnStock()));
             }

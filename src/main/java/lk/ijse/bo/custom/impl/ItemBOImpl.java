@@ -21,12 +21,12 @@ public class ItemBOImpl  implements ItemBO {
 
     @Override
     public boolean save(PartsDTO dto) throws SQLException {
-        return partsDAO.save(new Parts(dto.getPartId(),dto.getPartsName(),dto.getType(),dto.getUnitPrice(),dto.getQtyOnStock()));
+        return partsDAO.save(new Parts(dto.getItemCode(),dto.getDescription(),dto.getVehicleBrand(),dto.getUnitPrice(),dto.getQtyOnStock()));
     }
 
     @Override
     public boolean Update(PartsDTO dto) throws SQLException {
-        return partsDAO.Update(new Parts(dto.getPartId(),dto.getPartsName(),dto.getType(),dto.getUnitPrice(),dto.getQtyOnStock()));
+        return partsDAO.Update(new Parts(dto.getItemCode(),dto.getDescription(),dto.getVehicleBrand(),dto.getUnitPrice(),dto.getQtyOnStock()));
 
     }
 

@@ -58,8 +58,8 @@
                 <text><![CDATA[202/D,Welmilla,Bandaragama   0769435569  ]]></text>
             </staticText>
             <image>
-                <reportElement x="0" y="0" width="100" height="70" uuid="13b59e76-3177-46a1-9b43-82705613db42"/>
-                <imageExpression><![CDATA["C:/Users/Admin/Desktop/45.png"]]></imageExpression>
+                <reportElement x="0" y="0" width="95" height="67" uuid="30501aba-1855-4a65-87ed-51282e51238f"/>
+                <imageExpression><![CDATA["C:/Users/Admin/Desktop/My Final Project/MVC_Spare_Parts/finalproject/src/main/resources/img/45.png"]]></imageExpression>
             </image>
         </band>
     </title>

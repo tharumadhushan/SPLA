@@ -5,6 +5,7 @@ import lk.ijse.Model.SupplierOrderDetailDTO;
 import lk.ijse.bo.custom.PlaceSupplierBO;
 import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.*;
+import lk.ijse.dao.custom.impl.SupplierDAOImpl;
 import lk.ijse.dao.custom.impl.SupplierOrderDAOImpl;
 import lk.ijse.dao.custom.impl.SupplierOrderDetailDAOImpl;
 import lk.ijse.db.DBConnection;
@@ -21,6 +22,8 @@ public class PlaceSupplierBOImpl implements PlaceSupplierBO {
     OrderDAO orderDAO= (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
     SupplierOrderDetailDAO supplierOrderDetailDAO = new SupplierOrderDetailDAOImpl();
     SupplierOrderDAO supplierOrderDAO = new SupplierOrderDAOImpl();
+    SupplierDAO supplierDAO = new SupplierDAOImpl();
+
 
     @Override
     public List<String> genarateCode() throws SQLException {
@@ -29,7 +32,7 @@ public class PlaceSupplierBOImpl implements PlaceSupplierBO {
 
     @Override
     public List<String> genarateId() throws SQLException {
-        return customerDAO.genarateId();
+        return supplierDAO.genarateId();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class PlaceSupplierBOImpl implements PlaceSupplierBO {
 
     @Override
     public String getName(String id) throws SQLException {
-        return customerDAO.getName(id);
+        return supplierDAO.getName(id);
     }
 
     @Override

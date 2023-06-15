@@ -19,7 +19,7 @@
     <children>
         <ImageView fitHeight="752.0" fitWidth="1324.0" layoutX="-204.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../img/Untitled%20design.png" />
+                <Image url="@../img/Untitled design.png" />
             </image>
         </ImageView>
         <AnchorPane layoutX="79.0" layoutY="38.0" opacity="0.91" prefHeight="647.0" prefWidth="980.0" style="-fx-background-color: #00264d;" styleClass="edge-button" stylesheets="@../style/Style.css">
@@ -62,7 +62,7 @@
                         <Font name="System Bold Italic" size="20.0" />
                     </font>
                 </JFXButton>
-                <TextField fx:id="txtQty" layoutX="774.0" layoutY="210.0" prefHeight="33.0" prefWidth="66.0" style="-fx-background-color: White;" styleClass="edge-button">
+                <TextField fx:id="txtQty" layoutX="774.0" layoutY="210.0" prefHeight="33.0" prefWidth="66.0" style="-fx-background-color: White;" styleClass="edge-button" stylesheets="@../style/style.css">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>

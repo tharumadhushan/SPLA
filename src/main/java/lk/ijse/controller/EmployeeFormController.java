@@ -35,7 +35,12 @@ public class EmployeeFormController {
         if (empId.getText().matches("^[E0-9]{4}$")) {
             String id = empId.getText();
 
-            boolean isDelete = employeeBO.delete(id);
+            boolean isDelete = false;
+            try {
+                isDelete = employeeBO.delete(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (isDelete) {
                 new Alert(Alert.AlertType.CONFIRMATION, "ok").show();
             }
@@ -55,14 +60,18 @@ public class EmployeeFormController {
 
             EmployeeDTO employee = new EmployeeDTO(name, contact, id, nic, adress);
 
-            boolean isSave = employeeBO.save(employee);
-
-            if (isSave) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Ok").show();
+            boolean isSave = false;
+            try {
+                isSave = employeeBO.save(employee);
+                if (isSave) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Ok").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.WARNING, "ID NOT VALIED !!!").show();
+                e.printStackTrace();
             }
 
-        } else {
-            new Alert(Alert.AlertType.WARNING, "ID NOT VALIED !!!").show();
+
         }
     }
 
@@ -70,14 +79,20 @@ public class EmployeeFormController {
     void btnSearchOnAction(ActionEvent event) {
         if (empId.getText().matches("^[E0-9]{4}$")) {
             String id = empId.getText();
-            EmployeeDTO employee = employeeBO.search(id);
-            if (employee != null) {
-                empName.setText(employee.getEmployeeName());
-                empContact.setText(employee.getContact());
-                empId.setText(employee.getEmployeeId());
-                empNic.setText(employee.getEmployeenic());
-                empAdress.setText(employee.getEmployeeAdress());
+            EmployeeDTO employee = null;
+            try {
+                employee = employeeBO.search(id);
+                if (employee != null) {
+                    empName.setText(employee.getEmployeeName());
+                    empContact.setText(employee.getContact());
+                    empId.setText(employee.getEmployeeId());
+                    empNic.setText(employee.getEmployeenic());
+                    empAdress.setText(employee.getEmployeeAdress());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
 
         } else {
             new Alert(Alert.AlertType.WARNING, "ID NOT VALIED !!!").show();

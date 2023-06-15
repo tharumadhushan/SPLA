@@ -248,7 +248,7 @@ public class PlaceOrderFormCotroller implements Initializable {
     private void addBill() throws JRException, SQLException {
         String id=lblOrderId.getText();
         JasperDesign load = null;
-        load = JRXmlLoader.load(new File("C:\\Users\\Admin\\Desktop\\finalproject (3)\\finalproject\\finalproject\\src\\main\\resources\\report\\newReport.jrxml"));
+        load = JRXmlLoader.load(new File("C:\\Users\\Admin\\Desktop\\My Final Project\\finalproject\\src\\main\\resources\\report\\newReport.jrxml"));
         JRDesignQuery newQuery = new JRDesignQuery();
         String sql = "select i.description as name,i.unitPrice as unitPrice,oi.orderQTY , i.unitPrice*oi.orderQTY as subTotal  from parts i inner join orderdetail oi on  i.itemCode=oi.itemcode where oi.orderId = '"+id+"'";
         newQuery.setText(sql);
@@ -257,9 +257,10 @@ public class PlaceOrderFormCotroller implements Initializable {
         HashMap<String,Object> hm=new HashMap<>();
         hm.put("sparepartsOrder","Name");
         hm.put("orderId","O001");
-        JasperPrint jp = JasperFillManager.fillReport(js, null, DBConnection.getInstance().getConnection());
+        JasperPrint jp = JasperFillManager.fillReport(js,null,DBConnection.getInstance().getConnection());
         JasperViewer viewer = new JasperViewer(jp, false);
         viewer.show();
+
     }
 
     private void newPlaceOrders() throws IOException {
@@ -288,7 +289,7 @@ public class PlaceOrderFormCotroller implements Initializable {
         try {
             PartsDTO product = placeOrderBO.search(code);
             if (product != null){
-                lblDescription.setText(product.getPartsName());
+                lblDescription.setText(product.getDescription());
                 lblUnitPrice.setText(String.valueOf(product.getUnitPrice()));
                 lblQtyOnHand.setText(String.valueOf(product.getQtyOnStock()));
 
